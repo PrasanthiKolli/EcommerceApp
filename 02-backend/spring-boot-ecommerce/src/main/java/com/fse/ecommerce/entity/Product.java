@@ -3,6 +3,10 @@ package com.fse.ecommerce.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,34 +17,45 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "product")
+@Table(name="product")
 @Data
 public class Product {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "category_id", nullable = false)
-	private ProductCategory category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private ProductCategory category;
 
-	private String sku;
+    @Column(name = "sku")
+    private String sku;
 
-	private String name;
+    @Column(name = "name")
+    private String name;
 
-	private String description;
+    @Column(name = "description")
+    private String description;
 
-	private BigDecimal unitPrice;
+    @Column(name = "unit_price")
+    private BigDecimal unitPrice;
 
-	private String imageUrl;
+    @Column(name = "image_url")
+    private String imageUrl;
 
-	private boolean active;
+    @Column(name = "active")
+    private boolean active;
 
-	private int unitsInStock;
+    @Column(name = "units_in_stock")
+    private int unitsInStock;
 
-	private Date dateCreated;
+    @Column(name = "date_created")
+    @CreationTimestamp
+    private Date dateCreated;
 
-	private Date lastUpdated;
-
+    @Column(name = "last_updated")
+    @UpdateTimestamp
+    private Date lastUpdated;
 }
