@@ -8,11 +8,11 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products:Product[] = [];
+  products: Product[] = [];
 
-  constructor(  private productService:ProductService) { }
+  constructor(private productService: ProductService) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.listProducts();
   }
   listProducts() {
