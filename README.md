@@ -14,3 +14,8 @@ Angular:
 # npm install bootstrap@5.2.1
 
 # npm install @fortawesome/fontawesome-free
+
+
+RabbitMQ commands:
+ docker pull rabbitmq:3.13.2-management
+ docker run --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:3.13.2-management
