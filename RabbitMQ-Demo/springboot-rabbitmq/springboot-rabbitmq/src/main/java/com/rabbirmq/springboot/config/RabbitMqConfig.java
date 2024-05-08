@@ -29,7 +29,7 @@ public class RabbitMqConfig {
 	public TopicExchange exchange() {
 		return new TopicExchange(exchange);
 	}
-
+	@Bean
 	public Binding binding() {
 		return BindingBuilder
 				.bind(queue())

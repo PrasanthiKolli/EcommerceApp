@@ -9,22 +9,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RabbitMqProducer {
-	
+
 	@Value("${rabbitmq.exchange.name}")
 	private String exchange;
 
 	@Value("${rabbitmq.routing.key}")
 	private String routingKey;
-	
-	private static Logger LOGGER= LoggerFactory.getLogger(RabbitMqProducer.class);
-	
+
+	private static Logger LOGGER = LoggerFactory.getLogger(RabbitMqProducer.class);
+
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
-	
+
 	public void sendMessage(String message) {
-		LOGGER.info("message sent ->%s",message);
+		LOGGER.info(message);
 		rabbitTemplate.convertAndSend(exchange, routingKey, message);
-		
+
 	}
 
 }
