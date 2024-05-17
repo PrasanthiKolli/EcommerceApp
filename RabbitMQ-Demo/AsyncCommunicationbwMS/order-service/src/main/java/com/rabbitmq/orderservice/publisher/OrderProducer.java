@@ -24,7 +24,7 @@ public class OrderProducer {
 	private static final Logger LOGGER=LoggerFactory.getLogger(OrderProducer.class);
 	
 	public void sendMessage(OrderEvent orderEvent) {
-		
+		LOGGER.info("order is intiated");
 		rabbitTemaplte.convertAndSend(exchange, routingKey, orderEvent);
 	}
 
