@@ -19,7 +19,7 @@ public class OrderController {
 	@Autowired
 	private OrderProducer orderProducer;
 	
-	@PostMapping("/order")
+	@PostMapping("/stock")
 	public String placeOrder(@RequestBody Order order) {
 		
 		
@@ -28,7 +28,22 @@ public class OrderController {
 		event.setStatus("pending");
 		event.setMessage("order is in pending status");
 		event.setOrder(order);
-		orderProducer.sendMessage(event);
+		orderProducer.sendMessageToStock(event);
+		
+		return "order sent to rabbitmq";
+		
+	}
+	
+	@PostMapping("/email")
+	public String sentEmail(@RequestBody Order order) {
+		
+		
+		order.setOrderId(UUID.randomUUID().toString());
+		OrderEvent event = new OrderEvent();
+		event.setStatus("completed");
+		event.setMessage("order is completed");
+		event.setOrder(order);
+		orderProducer.sendMessageToEmail(event);
 		
 		return "order sent to rabbitmq";
 		

@@ -15,17 +15,25 @@ public class OrderProducer {
 	@Value("${rabbitmq.exchange.order.name}")
 	private String exchange;
 
-	@Value("${rabbitmq.order.routing.key}")
-	private String routingKey;
+	@Value("${rabbitmq.order.stock.routing.key}")
+	private String stockRoutingKey;
+
+	@Value("${rabbitmq.order.email.routing.key}")
+	private String emailRoutingKey;
 	
 	@Autowired
 	private RabbitTemplate rabbitTemaplte;
 	
 	private static final Logger LOGGER=LoggerFactory.getLogger(OrderProducer.class);
 	
-	public void sendMessage(OrderEvent orderEvent) {
-		LOGGER.info("order is intiated");
-		rabbitTemaplte.convertAndSend(exchange, routingKey, orderEvent);
+	public void sendMessageToStock(OrderEvent orderEvent) {
+		LOGGER.info(String.format("order sent to stock -> %s",orderEvent.toString()));
+		rabbitTemaplte.convertAndSend(exchange, stockRoutingKey, orderEvent);
+	}
+	
+	public void sendMessageToEmail(OrderEvent orderEvent) {
+		LOGGER.info(String.format("order sent to email -> %s",orderEvent.toString()));
+		rabbitTemaplte.convertAndSend(exchange, emailRoutingKey, orderEvent);
 	}
 
 }
