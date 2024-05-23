@@ -45,7 +45,7 @@ public class OrderController {
 		event.setOrder(order);
 		orderProducer.sendMessageToEmail(event);
 		
-		return "order sent to rabbitmq";
+		return "order mail sent to rabbitmq";
 		
 	}
 
