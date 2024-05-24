@@ -29,9 +29,10 @@ public class MyFirstTimerRoute extends RouteBuilder {
 	//	.transform().constant(LocalDateTime.now())
 	//	.bean("getCurrentTimeBean")
 		.bean(currentTimeBean)
-		.log("${body}")
-		.bean(loggerComponent)
+//		.log("${body}")
+//		.bean(loggerComponent)
 		.process(new SimpleLoggingProcessor())
+		.log("${body}")
 		.to("log:first-timer");
 		
 	}
@@ -53,11 +54,11 @@ class SimpleLogProcessingComponent{
 }
 @Component
 class SimpleLoggingProcessor implements Processor {
-
+	private Logger LOGGER = LoggerFactory.getLogger(SimpleLoggingProcessor.class);
 	@Override
 	public void process(Exchange exchange) throws Exception {
-		// TODO Auto-generated method stub
-
+		
+		LOGGER.info("SimpleLoggingProcessor {}",exchange.getMessage().getBody());
 	}
 
 }
